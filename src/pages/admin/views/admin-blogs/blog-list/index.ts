@@ -1,1 +1,1 @@
-export {default} from './blog-list/blogs'
+export {default} from './blogs'

@@ -1,1 +1,1 @@
-export {default} from './users-list/users'
+export {default} from './users'

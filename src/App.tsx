@@ -7,9 +7,10 @@ import { useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { supabase } from "./supabase";
 import { loginAtom } from "./store";
-import AdminPanelView from "./pages/admin/views";
 import AuthhorizeGuard from "./components/guard/authorized-guard";
 import UnAuthhorizeGuard from "./components/guard/unauthorized-guard";
+import AdminUsersView from "./pages/admin/views/admin-users/users-list/users";
+import AdminBlogsView from "./pages/admin/views/admin-blogs/blog-list/blogs";
 
 const App = () => {
   const setUser = useSetAtom(loginAtom);
@@ -51,7 +52,8 @@ const App = () => {
           </UnAuthhorizeGuard>
         }
       >
-        <Route path="admin" element={<AdminPanelView />} />
+        <Route path="admin/users" element={<AdminUsersView />} />
+        <Route path="admin/blogs" element={<AdminBlogsView />} />
       </Route>
       <Route path="/" element={<Navigate to="/auth/sign-in" />}></Route>
     </Routes>

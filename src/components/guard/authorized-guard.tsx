@@ -6,7 +6,7 @@ import { Navigate, Outlet } from "react-router";
 const AuthhorizeGuard: React.FC<PropsWithChildren> = ({children}) => {
     const user = useAtomValue(loginAtom)
     if(user){
-        return <Navigate to={`/dashboard/admin`}/>
+        return <Navigate to={`/dashboard/admin/users`}/>
     }
     return children || <Outlet />
 }   

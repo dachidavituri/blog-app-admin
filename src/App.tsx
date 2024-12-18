@@ -11,6 +11,10 @@ import AuthhorizeGuard from "./components/guard/authorized-guard";
 import UnAuthhorizeGuard from "./components/guard/unauthorized-guard";
 import AdminUsersView from "./pages/admin/views/admin-users/users-list/users";
 import AdminBlogsView from "./pages/admin/views/admin-blogs/blog-list/blogs";
+import UserCreateView from "./pages/admin/views/admin-users/user-create";
+import UserUpdateView from "./pages/admin/views/admin-users/user-update";
+import BlogsCreateView from "./pages/admin/views/admin-blogs/blog-create";
+import BlogsUpdateView from "./pages/admin/views/admin-blogs/blog-update";
 
 const App = () => {
   const setUser = useSetAtom(loginAtom);
@@ -53,7 +57,11 @@ const App = () => {
         }
       >
         <Route path="admin/users" element={<AdminUsersView />} />
+        <Route path="admin/user-create" element={<UserCreateView />} />
+        <Route path="admin/user-update/:id" element={<UserUpdateView />} />
         <Route path="admin/blogs" element={<AdminBlogsView />} />
+        <Route path="admin/blog-create" element={<BlogsCreateView />} />
+        <Route path="admin/blog-update/:id" element={<BlogsUpdateView />} />
       </Route>
       <Route path="/" element={<Navigate to="/auth/sign-in" />}></Route>
     </Routes>

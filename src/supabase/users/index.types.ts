@@ -20,3 +20,12 @@ export type User = {
   updated_at: string;
   is_anonymous: boolean;
 };
+export type UserPayload = {
+  email: string;
+  phone: string;
+};
+export type CreateUserPaylaod = {
+  email: string;
+  password: string;
+  phone:string;
+};

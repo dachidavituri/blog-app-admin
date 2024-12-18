@@ -15,6 +15,7 @@ import UserCreateView from "./pages/admin/views/admin-users/user-create";
 import UserUpdateView from "./pages/admin/views/admin-users/user-update";
 import BlogsCreateView from "./pages/admin/views/admin-blogs/blog-create";
 import BlogsUpdateView from "./pages/admin/views/admin-blogs/blog-update";
+import NotFound from "./pages/not-found";
 
 const App = () => {
   const setUser = useSetAtom(loginAtom);
@@ -63,6 +64,7 @@ const App = () => {
         <Route path="admin/blog-create" element={<BlogsCreateView />} />
         <Route path="admin/blog-update/:id" element={<BlogsUpdateView />} />
       </Route>
+      <Route path="*" element={<NotFound/>} />
       <Route path="/" element={<Navigate to="/auth/sign-in" />}></Route>
     </Routes>
   );

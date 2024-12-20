@@ -4,11 +4,12 @@ import { useForm } from "antd/es/form/Form";
 import { useNavigate } from "react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCreateUser } from "../../../../../react-query/mutation/user";
+import { DASHBOARD_PATH } from "../../../../../routes/dashboard/index.enum";
 
 type FieldType = {
   email: string;
   password: string;
-  phone:string;
+  phone: string;
 };
 
 const UserCreateView: React.FC = () => {
@@ -18,7 +19,8 @@ const UserCreateView: React.FC = () => {
   const { mutate: handleCreateUser } = useCreateUser();
   const onFinish = (values: FieldType) => {
     handleCreateUser(values, {
-      onSuccess: () => navigate("/dashboard/admin/users"),
+      onSuccess: () =>
+        navigate(`/${DASHBOARD_PATH.DASHBOARD}/${DASHBOARD_PATH.USERS}`),
     });
     queryClient.invalidateQueries({ queryKey: ["users-list"] });
   };

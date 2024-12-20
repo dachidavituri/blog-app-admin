@@ -8,6 +8,7 @@ import { useAtomValue } from "jotai";
 import { loginAtom } from "../../../../../store";
 import { useCreateBlog } from "../../../../../react-query/mutation/blogs";
 import { useNavigate } from "react-router";
+import { DASHBOARD_PATH } from "../../../../../routes/dashboard/index.enum";
 
 const BlogsCreateView: React.FC = () => {
   const queryClient = useQueryClient();
@@ -30,7 +31,7 @@ const BlogsCreateView: React.FC = () => {
     handleCreateBlog(
       { payload, user },
       {
-        onSuccess: () => navigate("/dashboard/admin/blogs"),
+        onSuccess: () => navigate(`/${DASHBOARD_PATH.DASHBOARD}/${DASHBOARD_PATH.BLOGS}`),
       }
     );
     queryClient.invalidateQueries({ queryKey: ["blogs-list"] });

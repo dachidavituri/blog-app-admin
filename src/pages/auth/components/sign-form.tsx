@@ -3,6 +3,8 @@ import type { FormProps } from "antd";
 import { Button, Form, Input } from "antd";
 import { useNavigate } from "react-router";
 import { useLogin } from "../../../react-query/mutation/auth";
+import { AUTH_PATHS } from "../../../routes/auth/index.enum";
+import { DASHBOARD_PATH } from "../../../routes/dashboard/index.enum";
 type FieldType = {
   email: string;
   password: string;
@@ -18,7 +20,7 @@ const SignForm: React.FC = () => {
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
     handleLogin(values, {
       onSuccess: () => {
-        navigate("/dashboard/login");
+        navigate(`/${DASHBOARD_PATH.DASHBOARD}/${AUTH_PATHS.SIGNIN}`);
       },
     });
   };

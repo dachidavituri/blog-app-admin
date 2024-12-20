@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router";
 import { useUpdateUser } from "../../../../../react-query/mutation/user";
 import { useQueryClient } from "@tanstack/react-query";
 import SkeletonLoading from "../../../../../components/skeleton-ui/skeleton";
+import { DASHBOARD_PATH } from "../../../../../routes/dashboard/index.enum";
 type FieldType = {
   email: string;
   phone: string;
@@ -20,7 +21,7 @@ const UserUpdateView: React.FC = () => {
   const { mutate: handleUpdateUser } = useUpdateUser(id as string);
   const onFinish = (values: FieldType) => {
     handleUpdateUser(values, {
-      onSuccess: () => navigate("/dashboard/admin/users"),
+      onSuccess: () => navigate(`/${DASHBOARD_PATH.DASHBOARD}/${DASHBOARD_PATH.USERS}`),
     });
     queryClient.invalidateQueries({ queryKey: ["users-list"] });
   };

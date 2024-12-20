@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Route } from "react-router";
 import { DASHBOARD_PATH } from "../index.enum";
 import { lazy } from "react";

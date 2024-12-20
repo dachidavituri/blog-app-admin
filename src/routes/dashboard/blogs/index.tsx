@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Route } from "react-router";
 import { lazy } from "react";
 const BlogsCreateView = lazy(

@@ -20,12 +20,12 @@ const UserUpdateView: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data: user, isLoading, isFetching } = useGetUserById(id as string);
-  const { mutate: handleUpdateUser } = useUpdateUser(id as string);
+  const { mutate: handleUpdateUser } = useUpdateUser(id as string, {
+    onSuccess: () =>
+      navigate(`/${DASHBOARD_PATH.DASHBOARD}/${DASHBOARD_PATH.USERS}`),
+  });
   const onFinish = (values: FieldType) => {
-    handleUpdateUser(values, {
-      onSuccess: () =>
-        navigate(`/${DASHBOARD_PATH.DASHBOARD}/${DASHBOARD_PATH.USERS}`),
-    });
+    handleUpdateUser(values);
     queryClient.invalidateQueries({ queryKey: [LIST] });
   };
   if (isLoading || isFetching) {

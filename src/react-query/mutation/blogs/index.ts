@@ -1,21 +1,32 @@
-import { useMutation } from "@tanstack/react-query";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  useMutation,
+  UseMutationOptions,
+  UseMutationResult,
+} from "@tanstack/react-query";
 import { createBlog, updateBlog } from "../../../supabase/blogs";
 import { Blog } from "../../../supabase/blogs/index.types";
 import { useBlogsMutationKeys } from "./useBlogsMutationKeys";
 
-export const useUpdateBlog = (id: string) => {
+export const useUpdateBlog = (
+  id: string,
+  options?: UseMutationOptions<null, Error, Partial<Blog>, unknown>
+): UseMutationResult<null, Error, Partial<Blog>, unknown> => {
   const { UPDATE } = useBlogsMutationKeys();
-  return useMutation({
+  return useMutation<null, Error, Partial<Blog>, unknown>({
     mutationKey: [UPDATE],
     mutationFn: (payload: Partial<Blog>) => updateBlog(id, payload),
+    ...options,
   });
 };
-export const useCreateBlog = () => {
+export const useCreateBlog = (
+  options?: UseMutationOptions<any, Error, any, unknown>
+): UseMutationResult<void, Error, any, unknown> => {
   const { CREATE } = useBlogsMutationKeys();
-  return useMutation({
+  return useMutation<void, Error, any, unknown>({
     mutationKey: [CREATE],
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     mutationFn: (variables: { payload: any; user: any }) =>
       createBlog(variables),
+    ...options,
   });
 };

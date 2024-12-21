@@ -17,7 +17,10 @@ const BlogsCreateView: React.FC = () => {
   const user = useAtomValue(loginAtom);
   const [form] = useForm<BlogsForm>();
   const navigate = useNavigate();
-  const { mutate: handleCreateBlog } = useCreateBlog();
+  const { mutate: handleCreateBlog } = useCreateBlog({
+    onSuccess: () =>
+      navigate(`/${DASHBOARD_PATH.DASHBOARD}/${DASHBOARD_PATH.BLOGS}`),
+  });
   const [file, setFile] = useState<File | null>(null);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -30,13 +33,7 @@ const BlogsCreateView: React.FC = () => {
       ...values,
       image_url: file || null,
     };
-    handleCreateBlog(
-      { payload, user },
-      {
-        onSuccess: () =>
-          navigate(`/${DASHBOARD_PATH.DASHBOARD}/${DASHBOARD_PATH.BLOGS}`),
-      }
-    );
+    handleCreateBlog({ payload, user });
     queryClient.invalidateQueries({ queryKey: [LIST] });
   };
   return (

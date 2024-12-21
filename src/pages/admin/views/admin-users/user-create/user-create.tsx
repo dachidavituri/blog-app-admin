@@ -14,16 +14,16 @@ type FieldType = {
 };
 
 const UserCreateView: React.FC = () => {
-  const {LIST} = useUsersQueryKeys()
+  const { LIST } = useUsersQueryKeys();
   const queryClient = useQueryClient();
   const [form] = useForm();
   const navigate = useNavigate();
-  const { mutate: handleCreateUser } = useCreateUser();
+  const { mutate: handleCreateUser } = useCreateUser({
+    onSuccess: () =>
+      navigate(`/${DASHBOARD_PATH.DASHBOARD}/${DASHBOARD_PATH.USERS}`),
+  });
   const onFinish = (values: FieldType) => {
-    handleCreateUser(values, {
-      onSuccess: () =>
-        navigate(`/${DASHBOARD_PATH.DASHBOARD}/${DASHBOARD_PATH.USERS}`),
-    });
+    handleCreateUser(values);
     queryClient.invalidateQueries({ queryKey: [LIST] });
   };
   return (

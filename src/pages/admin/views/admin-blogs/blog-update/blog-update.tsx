@@ -23,13 +23,13 @@ const BlogsUpdateView: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data: blog, isLoading, isFetching } = useGetBlogsById(id as string);
-  const { mutate: handleUpdateBlog } = useUpdateBlog(id as string);
+  const { mutate: handleUpdateBlog } = useUpdateBlog(id as string, {
+    onSuccess: () =>
+      navigate(`/${DASHBOARD_PATH.DASHBOARD}/${DASHBOARD_PATH.BLOGS}`),
+  });
   const onFinish = (values: FieldType) => {
     console.log(values);
-    handleUpdateBlog(values, {
-      onSuccess: () =>
-        navigate(`/${DASHBOARD_PATH.DASHBOARD}/${DASHBOARD_PATH.BLOGS}`),
-    });
+    handleUpdateBlog(values);
     queryClient.invalidateQueries({ queryKey: [LIST] });
   };
   if (isLoading || isFetching) {

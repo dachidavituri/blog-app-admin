@@ -17,7 +17,7 @@ type FieldType = {
 };
 
 const BlogsUpdateView: React.FC = () => {
-  const {LIST} = useBlogQueryKeys()
+  const { LIST } = useBlogQueryKeys();
   const queryClient = useQueryClient();
   const [form] = useForm<FieldType>();
   const { id } = useParams();
@@ -27,7 +27,8 @@ const BlogsUpdateView: React.FC = () => {
   const onFinish = (values: FieldType) => {
     console.log(values);
     handleUpdateBlog(values, {
-      onSuccess: () => navigate(`/${DASHBOARD_PATH.DASHBOARD}/${DASHBOARD_PATH.BLOGS}`),
+      onSuccess: () =>
+        navigate(`/${DASHBOARD_PATH.DASHBOARD}/${DASHBOARD_PATH.BLOGS}`),
     });
     queryClient.invalidateQueries({ queryKey: [LIST] });
   };

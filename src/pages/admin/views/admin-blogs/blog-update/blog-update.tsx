@@ -7,6 +7,7 @@ import { useGetBlogsById } from "../../../../../react-query/query/blogs";
 import SkeletonLoading from "../../../../../components/skeleton-ui/skeleton";
 import { useUpdateBlog } from "../../../../../react-query/mutation/blogs";
 import { DASHBOARD_PATH } from "../../../../../routes/dashboard/index.enum";
+import { useBlogQueryKeys } from "../../../../../react-query/query/blogs/useBlogsQueryKeys";
 const { TextArea } = Input;
 type FieldType = {
   title_ka: string;
@@ -16,6 +17,7 @@ type FieldType = {
 };
 
 const BlogsUpdateView: React.FC = () => {
+  const {LIST} = useBlogQueryKeys()
   const queryClient = useQueryClient();
   const [form] = useForm<FieldType>();
   const { id } = useParams();
@@ -27,7 +29,7 @@ const BlogsUpdateView: React.FC = () => {
     handleUpdateBlog(values, {
       onSuccess: () => navigate(`/${DASHBOARD_PATH.DASHBOARD}/${DASHBOARD_PATH.BLOGS}`),
     });
-    queryClient.invalidateQueries({ queryKey: ["blogs-list"] });
+    queryClient.invalidateQueries({ queryKey: [LIST] });
   };
   if (isLoading || isFetching) {
     return <SkeletonLoading number={4} />;

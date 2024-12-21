@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCreateUser } from "../../../../../react-query/mutation/user";
 import { DASHBOARD_PATH } from "../../../../../routes/dashboard/index.enum";
+import { useUsersQueryKeys } from "../../../../../react-query/query/users/useUsersQueryKeys";
 
 type FieldType = {
   email: string;
@@ -13,6 +14,7 @@ type FieldType = {
 };
 
 const UserCreateView: React.FC = () => {
+  const {LIST} = useUsersQueryKeys()
   const queryClient = useQueryClient();
   const [form] = useForm();
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ const UserCreateView: React.FC = () => {
       onSuccess: () =>
         navigate(`/${DASHBOARD_PATH.DASHBOARD}/${DASHBOARD_PATH.USERS}`),
     });
-    queryClient.invalidateQueries({ queryKey: ["users-list"] });
+    queryClient.invalidateQueries({ queryKey: [LIST] });
   };
   return (
     <Form

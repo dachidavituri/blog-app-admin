@@ -9,8 +9,10 @@ import { loginAtom } from "../../../../../store";
 import { useCreateBlog } from "../../../../../react-query/mutation/blogs";
 import { useNavigate } from "react-router";
 import { DASHBOARD_PATH } from "../../../../../routes/dashboard/index.enum";
+import { useBlogQueryKeys } from "../../../../../react-query/query/blogs/useBlogsQueryKeys";
 
 const BlogsCreateView: React.FC = () => {
+  const { LIST } = useBlogQueryKeys();
   const queryClient = useQueryClient();
   const user = useAtomValue(loginAtom);
   const [form] = useForm<BlogsForm>();
@@ -31,10 +33,11 @@ const BlogsCreateView: React.FC = () => {
     handleCreateBlog(
       { payload, user },
       {
-        onSuccess: () => navigate(`/${DASHBOARD_PATH.DASHBOARD}/${DASHBOARD_PATH.BLOGS}`),
+        onSuccess: () =>
+          navigate(`/${DASHBOARD_PATH.DASHBOARD}/${DASHBOARD_PATH.BLOGS}`),
       }
     );
-    queryClient.invalidateQueries({ queryKey: ["blogs-list"] });
+    queryClient.invalidateQueries({ queryKey: [LIST] });
   };
   return (
     <Form
